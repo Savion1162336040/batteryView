@@ -45,7 +45,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:id="@+id/battery"
-        app:battery_charge_drawable="@drawable/flash_veritical"
         app:battery_corner="5dp"
         app:battery_power="50"
         app:battery_frame_width="5dp"

@@ -67,6 +67,10 @@ public class BatteryView extends View {
         t.recycle();
         paint = new Paint();
 
+        if (chargeDrawable == null) {
+            chargeDrawable = getResources().getDrawable(R.drawable.flash_veritical,null);
+        }
+
         batteryBroadCast = new BatteryBroadCast();
         batteryBroadCast.setChangeCallBack((level, isCharge) -> {
             if (autoObserve) {

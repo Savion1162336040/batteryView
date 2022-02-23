@@ -29,7 +29,7 @@ public class BatteryBroadCast extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction() == Intent.ACTION_BATTERY_CHANGED) {
             int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
-            int chargeState = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
+            int chargeState = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0);
             Log.e("savion", String.format("batter : %s , isCharge : %s", level, chargeState));
             if (changeCallBack != null) {
                 if (chargeState == BatteryManager.BATTERY_PLUGGED_AC) {
@@ -41,7 +41,7 @@ public class BatteryBroadCast extends BroadcastReceiver {
                 } else if (chargeState == BatteryManager.BATTERY_PLUGGED_WIRELESS) {
                     //无线充电
                     changeCallBack.onBatteryChange(level, ChargeMode.WIRELESS);
-                } else if (chargeState != -1) {
+                } else if (chargeState != 0) {
                     //未识别的充电方式
                     changeCallBack.onBatteryChange(level, ChargeMode.UNKNOW);
                 } else {
