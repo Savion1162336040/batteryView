@@ -1,0 +1,3 @@
+include ':battery'
+include ':app'
+rootProject.name = "BatteryView"

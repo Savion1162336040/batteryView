@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BatteryView">
+        <attr name="battery_charge_drawable" format="reference"/>
+        <attr name="battery_frame_color" format="color"/>
+        <attr name="battery_frame_width" format="dimension"/>
+        <attr name="battery_electrode_width_ratio" format="float"/>
+        <attr name="battery_electrode_height_ratio" format="float"/>
+        <attr name="battery_full_color" format="color"/>
+        <attr name="battery_empty_color" format="color"/>
+        <attr name="battery_corner" format="dimension"/>
+        <attr name="battery_power" format="integer"/>
+        <attr name="battery_is_charge" format="boolean"/>
+    </declare-styleable>
+</resources>

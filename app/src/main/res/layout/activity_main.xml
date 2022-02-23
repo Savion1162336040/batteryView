@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MainActivity">
+
+    <EditText
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/update_power"
+        android:id="@+id/power"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="输入电量"
+        android:inputType="number" />
+
+    <Button
+        app:layout_constraintStart_toEndOf="@+id/power"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/power"
+        app:layout_constraintBottom_toBottomOf="@id/power"
+        android:id="@+id/update_power"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="更新电量" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/power"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:checked="true"
+        android:textOff="关闭充电"
+        android:textOn="开启充电"
+        android:id="@+id/toggle_charge"
+        />
+    <com.savion.battery.BatteryView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintWidth_percent="0.3"
+        app:layout_constraintTop_toBottomOf="@+id/toggle_charge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/battery"
+        app:battery_charge_drawable="@drawable/flash_veritical"
+        app:battery_corner="5dp"
+        app:battery_power="50"
+        app:battery_frame_width="5dp"
+        app:battery_full_color="#00ff00"
+        app:battery_is_charge="true"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
