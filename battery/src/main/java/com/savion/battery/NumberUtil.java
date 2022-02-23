@@ -7,9 +7,10 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 /**
- * 数字显示管理工具
- * Created by lixam on 2016/6/12.
- */
+ * @author savion
+ * @date 2022/2/23
+ * @desc 数字计算工具
+ **/
 public class NumberUtil {
     public static double change(double a) {
         return a * Math.PI / 180;

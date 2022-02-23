@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.IntRange;
@@ -33,9 +34,13 @@ public class BatteryView extends View {
     private float corner = 10f;
     @IntRange(from = 0, to = 100)
     private int batteryPower = 0;
+    //自动监听电池变化
+    private boolean autoObserve = true;
     //是否在充电
     private boolean isCharge = false;
     private Drawable chargeDrawable;
+    private BatteryBroadCast batteryBroadCast;
+    private BatteryBroadCast.BatteryChangeCallBack batteryChangeCallBack;
 
     public BatteryView(Context context) {
         this(context, null);
@@ -58,8 +63,44 @@ public class BatteryView extends View {
         electrodeYRatio = t.getFloat(R.styleable.BatteryView_battery_electrode_height_ratio, electrodeYRatio);
         corner = t.getDimension(R.styleable.BatteryView_battery_corner, corner);
         isCharge = t.getBoolean(R.styleable.BatteryView_battery_is_charge, isCharge);
+        autoObserve = t.getBoolean(R.styleable.BatteryView_battery_auto_observe, autoObserve);
         t.recycle();
         paint = new Paint();
+
+        batteryBroadCast = new BatteryBroadCast();
+        batteryBroadCast.setChangeCallBack((level, isCharge) -> {
+            if (autoObserve) {
+                updateAll(level, isCharge != null && isCharge.isCharging());
+            }
+            if (batteryChangeCallBack != null) {
+                batteryChangeCallBack.onBatteryChange(level, isCharge);
+            }
+        });
+        batteryBroadCast.registe(context);
+    }
+
+    public void setBatteryChangeCallBack(BatteryBroadCast.BatteryChangeCallBack batteryChangeCallBack) {
+        this.batteryChangeCallBack = batteryChangeCallBack;
+    }
+
+    public void onDestory(Context context) {
+        if (batteryBroadCast != null) {
+            batteryBroadCast.unregiste(context);
+        }
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        Log.e("savion", "batteryview attachedToWindow");
+
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        Log.e("savion", "batteryview detachedFromWindow");
+        onDestory(getContext());
     }
 
     /**
@@ -82,6 +123,16 @@ public class BatteryView extends View {
      **/
     public void updateIsCharge(boolean isCharge) {
         if (isCharge != this.isCharge) {
+            this.isCharge = isCharge;
+            invalidate();
+        }
+    }
+
+    public void updateAll(int power, boolean isCharge) {
+        int bp = (int) NumberUtil.between(power, 100, 0);
+        if (bp != this.batteryPower
+                || this.isCharge != isCharge) {
+            this.batteryPower = bp;
             this.isCharge = isCharge;
             invalidate();
         }

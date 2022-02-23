@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="BatteryView">
-        <attr name="battery_charge_drawable" format="reference"/>
-        <attr name="battery_frame_color" format="color"/>
-        <attr name="battery_frame_width" format="dimension"/>
-        <attr name="battery_electrode_width_ratio" format="float"/>
-        <attr name="battery_electrode_height_ratio" format="float"/>
-        <attr name="battery_full_color" format="color"/>
-        <attr name="battery_empty_color" format="color"/>
-        <attr name="battery_corner" format="dimension"/>
-        <attr name="battery_power" format="integer"/>
-        <attr name="battery_is_charge" format="boolean"/>
+        <!--        充电标记-->
+        <attr name="battery_charge_drawable" format="reference" />
+        <!--        描边颜色-->
+        <attr name="battery_frame_color" format="color" />
+        <!--        描边宽度-->
+        <attr name="battery_frame_width" format="dimension" />
+        <!--        电极头所占宽度比例0-1-->
+        <attr name="battery_electrode_width_ratio" format="float" />
+        <!--        电极头所占高度比例,0-1-->
+        <attr name="battery_electrode_height_ratio" format="float" />
+        <!--        电量区域电池填充颜色-->
+        <attr name="battery_full_color" format="color" />
+        <!--        电量区域背景颜色-->
+        <attr name="battery_empty_color" format="color" />
+        <!--        圆角 -->
+        <attr name="battery_corner" format="dimension" />
+        <!--        电池电量-->
+        <attr name="battery_power" format="integer" />
+        <!--        是否正在充电-->
+        <attr name="battery_is_charge" format="boolean" />
+        <!--        是否自己监听电池变化    -->
+        <attr name="battery_auto_observe" format="boolean" />
     </declare-styleable>
 </resources>

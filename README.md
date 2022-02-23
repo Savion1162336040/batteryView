@@ -14,6 +14,7 @@
 |battery_corner|dimension|圆角尺寸,默认10px|
 |battery_power|int|电量值,范围0-100,默认0|
 |battery_is_charge|boolean|是否正在充电,默认false|
+|battery_auto_observe|boolean|是否自动监听电池变化,默认true|
 
 ## 项目依赖
 [![](https://jitpack.io/v/Savion1162336040/batteryView.svg)](https://jitpack.io/#Savion1162336040/batteryView)
