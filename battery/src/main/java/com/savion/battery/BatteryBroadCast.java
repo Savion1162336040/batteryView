@@ -54,13 +54,21 @@ public class BatteryBroadCast extends BroadcastReceiver {
 
     public void unregiste(Context context) {
         if (context != null) {
-            context.unregisterReceiver(this);
+            try {
+                context.unregisterReceiver(this);
+            } catch (Exception e) {
+                Log.e("savion", "unregiste battery broadcastreceiver failed:" + e.getMessage());
+            }
         }
     }
 
     public void registe(Context context) {
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(Intent.ACTION_BATTERY_CHANGED);
-        context.registerReceiver(this, intentFilter);
+        try {
+            IntentFilter intentFilter = new IntentFilter();
+            intentFilter.addAction(Intent.ACTION_BATTERY_CHANGED);
+            context.registerReceiver(this, intentFilter);
+        } catch (Exception e) {
+            Log.e("savion", "registe battery broadcastreceiver failed:" + e.getMessage());
+        }
     }
 }
