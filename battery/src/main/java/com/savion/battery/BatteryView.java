@@ -68,19 +68,20 @@ public class BatteryView extends View {
         paint = new Paint();
 
         if (chargeDrawable == null) {
-            chargeDrawable = getResources().getDrawable(R.drawable.flash_veritical,null);
+            chargeDrawable = getResources().getDrawable(R.drawable.flash_veritical, null);
         }
 
-        batteryBroadCast = new BatteryBroadCast();
-        batteryBroadCast.setChangeCallBack((level, isCharge) -> {
-            if (autoObserve) {
+        if (autoObserve) {
+            batteryBroadCast = new BatteryBroadCast();
+            batteryBroadCast.setChangeCallBack((level, isCharge) -> {
                 updateAll(level, isCharge != null && isCharge.isCharging());
-            }
-            if (batteryChangeCallBack != null) {
-                batteryChangeCallBack.onBatteryChange(level, isCharge);
-            }
-        });
-        batteryBroadCast.registe(context);
+                if (batteryChangeCallBack != null) {
+                    batteryChangeCallBack.onBatteryChange(level, isCharge);
+                }
+            });
+            batteryBroadCast.registe(context);
+        }
+
     }
 
     public void setBatteryChangeCallBack(BatteryBroadCast.BatteryChangeCallBack batteryChangeCallBack) {
