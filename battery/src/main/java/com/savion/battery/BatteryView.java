@@ -22,6 +22,7 @@ public class BatteryView extends View {
     private int batteryFullColor = Color.GREEN;
     private int batteryEmptyColor = Color.WHITE;
     private int batteryFrameColor = Color.BLACK;
+    private float fullPadding = 0;
     private float electrodeXRatio = 0.1f;
     private float electrodeYRatio = 0.5f;
     /**
@@ -64,6 +65,7 @@ public class BatteryView extends View {
         corner = t.getDimension(R.styleable.BatteryView_battery_corner, corner);
         isCharge = t.getBoolean(R.styleable.BatteryView_battery_is_charge, isCharge);
         autoObserve = t.getBoolean(R.styleable.BatteryView_battery_auto_observe, autoObserve);
+        fullPadding = t.getDimension(R.styleable.BatteryView_battery_full_padding, fullPadding);
         t.recycle();
         paint = new Paint();
 
@@ -146,8 +148,15 @@ public class BatteryView extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int width = MeasureSpec.getSize(widthMeasureSpec);
-        int height = (int) (width * 0.5f);
-        setMeasuredDimension(widthMeasureSpec, MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY));
+        int height = MeasureSpec.getSize(heightMeasureSpec);
+        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+        if (height <= 0 || heightMode == MeasureSpec.AT_MOST) {
+            height = (int) (width * 0.5f);
+            setMeasuredDimension(widthMeasureSpec, MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY));
+        } else {
+            setMeasuredDimension(widthMeasureSpec, heightMeasureSpec);
+        }
     }
 
     @Override
@@ -181,7 +190,11 @@ public class BatteryView extends View {
 
             float fullWidth = (batteryFullWidth) * (batteryPower / 100f);
 
-            canvas.drawRoundRect(batteryFrameWidth, batteryFrameWidth, batteryFrameWidth + fullWidth, batteryFrameWidth + batteryFullHeight, corner, corner, paint);
+            if (fullPadding > 0) {
+                canvas.drawRoundRect(batteryFrameWidth + fullPadding, batteryFrameWidth + fullPadding, batteryFrameWidth + fullWidth - fullPadding, batteryFrameWidth + batteryFullHeight - fullPadding, corner, corner, paint);
+            } else {
+                canvas.drawRoundRect(batteryFrameWidth, batteryFrameWidth, batteryFrameWidth + fullWidth, batteryFrameWidth + batteryFullHeight, corner, corner, paint);
+            }
         }
 
         //画充电标记

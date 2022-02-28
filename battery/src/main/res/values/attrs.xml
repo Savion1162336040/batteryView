@@ -13,6 +13,7 @@
         <attr name="battery_electrode_height_ratio" format="float" />
         <!--        电量区域电池填充颜色-->
         <attr name="battery_full_color" format="color" />
+        <attr name="battery_full_padding" format="dimension"/>
         <!--        电量区域背景颜色-->
         <attr name="battery_empty_color" format="color" />
         <!--        圆角 -->

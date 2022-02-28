@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#ffffff"
     tools:context=".MainActivity">
 
     <EditText
@@ -47,8 +48,10 @@
         android:id="@+id/battery"
         app:battery_corner="5dp"
         app:battery_power="50"
+        app:battery_full_padding="2dp"
         app:battery_frame_width="5dp"
         app:battery_full_color="#00ff00"
+        app:battery_empty_color="#ffffff"
         app:battery_is_charge="true"
         />
 
